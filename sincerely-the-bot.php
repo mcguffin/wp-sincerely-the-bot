@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: Mail-from-the-Bot
-Plugin URI: http://flyingletters.com/mail-from-the-bot/
+Plugin Name: Sincerely, the bot
+Plugin URI: https://github.com/mcguffin/wp-sincerely-the-bot
 Description: Sets an arbitrary Email address as From-Address for the WP automailer.
-Version: 1.0.1
-Author: Joern Lund
-Author URI: http://flyingletters.com/
+Version: 1.0.0
+Author: Jörn Lund
+Author URI: https://github.com/mcguffin/
 */
 
 class FromTheBot {
