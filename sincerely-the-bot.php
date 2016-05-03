@@ -9,6 +9,9 @@ Author URI: https://github.com/mcguffin/
 */
 
 class FromTheBot {
+	
+	private static $sender_address;
+	
 	// --------------------------------------------------
 	// Options page
 	// --------------------------------------------------
@@ -16,9 +19,9 @@ class FromTheBot {
 		add_action( 'plugins_loaded' , array( __CLASS__, 'plugin_loaded' ) );
 		
 		if ( is_multisite() )
-			$from_bot = get_site_option( 'from_the_bot' );
+			self::$sender_address = $from_bot = get_site_option( 'from_the_bot' );
 		else 
-			$from_bot = get_option( 'from_the_bot' );
+			self::$sender_address = $from_bot = get_option( 'from_the_bot' );
 
 		if ( ! is_multisite() && is_admin() ) {
 			add_option( 'from_the_bot' , '' , '' , 'yes' );
@@ -28,15 +31,20 @@ class FromTheBot {
 			add_action( 'network_admin_menu', array( __CLASS__ , 'create_network_menu' ));
 		}
 
-		if ((boolean) $from_bot)
+		if ((boolean) $from_bot) {
 			add_filter('wp_mail_from',create_function('$from','return "'.$from_bot.'";')); // automat@podirate.org
+		}
 		
-		
-		if ( defined( 'WPBOT_SMTP_HOST' ) )
+		if ( defined( 'WPBOT_SMTP_HOST' ) ) {
 			add_action( 'phpmailer_init' , array(__CLASS__,'force_smtp') );
-		
+		} else if ((boolean) $from_bot) {
+			add_action( 'phpmailer_init' , array(__CLASS__,'force_sender') );
+			
+		}
 	}
-	
+	static function force_sender( &$phpmailer ) {
+		$phpmailer->Sender = self::$sender_address;
+	}
 	static function force_smtp( &$phpmailer ) {
 		$phpmailer->IsSMTP();
 		
@@ -77,7 +85,7 @@ class FromTheBot {
 	static function register_settings() { // @ admin_init
 		register_setting( 'from_the_bot', 'from_the_bot' );
 		add_settings_section('fromthebot_main', __('Main Settings','fromthebot'), '__return_false', 'from_the_bot');
-		add_settings_field('plugin_text_string', __('Set WordPress’ email from','fromthebot'), array( __CLASS__ , 'setting_hide_undisclosed'), 'from_the_bot', 'fromthebot_main');
+		add_settings_field('plugin_text_string', __('Set WordPress’ email from','fromthebot'), array( __CLASS__ , 'setting_bot_address'), 'from_the_bot', 'fromthebot_main');
 	}
 	static function settings_page() {
 		?>
@@ -106,7 +114,7 @@ class FromTheBot {
 		</div>
 		<?php
 	}
-	static function setting_hide_undisclosed() {
+	static function setting_bot_address() {
 		if ( is_multisite() && is_network_admin() )
 			$from_bot = get_site_option( 'from_the_bot' );
 		else 
@@ -118,5 +126,3 @@ class FromTheBot {
 }
 
 FromTheBot::init();
-
-?>
