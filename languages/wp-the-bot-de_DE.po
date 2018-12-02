@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Sincerely The Bot v0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-02T16:54:13+00:00\n"
-"PO-Revision-Date: 2018-12-02 17:58+0100\n"
+"PO-Revision-Date: 2018-12-02 18:10+0100\n"
 "Last-Translator: joern <joern@flyingletters.com>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -81,7 +81,7 @@ msgstr "Aktivieren"
 #: include/TheBot/Settings/SettingsMailer.php:316
 #: include/TheBot/Settings/SettingsMailer.php:331
 msgid "Enable SMTP Delivery"
-msgstr "SMT-Versand aktivieren"
+msgstr "SMTP-Versand aktivieren"
 
 #: include/TheBot/Settings/SettingsMailer.php:207
 msgid "Host"
