@@ -1,0 +1,170 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Sincerely The Bot v0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-02T16:54:13+00:00\n"
+"PO-Revision-Date: 2018-12-02 17:58+0100\n"
+"Last-Translator: joern <joern@flyingletters.com>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: Poedit 2.0.8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: include/TheBot/Compat/WPMU.php:56
+msgid "This is not allowd."
+msgstr "Das ist nicht erlaubt."
+
+#: include/TheBot/Compat/WPMU.php:87
+#: include/TheBot/Settings/SettingsMailer.php:69
+#: include/TheBot/Settings/SettingsMailer.php:106
+msgid "WP Mailer"
+msgstr "WP-Mailer"
+
+#: include/TheBot/Settings/SettingsMailer.php:78
+msgid "WP-Mailer Test"
+msgstr "WP-Mailer Test"
+
+#: include/TheBot/Settings/SettingsMailer.php:78
+msgid ""
+"It Works.\n"
+"\n"
+" Sincerely,\n"
+"The Bot\n"
+msgstr ""
+"Es funktioniert.\n"
+"\n"
+"Hochachtungsvoll,\n"
+"Der Bot\n"
+
+# @ fromthebot
+#: include/TheBot/Settings/SettingsMailer.php:115
+msgid "Save Settings"
+msgstr "Einstellungen speichern"
+
+#: include/TheBot/Settings/SettingsMailer.php:116
+msgid "Save and Send Testmail"
+msgstr "Speichern und Testmail verschicken"
+
+# @ fromthebot
+#: include/TheBot/Settings/SettingsMailer.php:152
+msgid "Mailer Settings"
+msgstr "Mailer Einstellungen"
+
+#: include/TheBot/Settings/SettingsMailer.php:160
+msgid "From Address"
+msgstr "Absender-Adresse"
+
+#: include/TheBot/Settings/SettingsMailer.php:173
+msgid "From Name"
+msgstr "Absendername"
+
+# @ fromthebot
+#: include/TheBot/Settings/SettingsMailer.php:183
+msgid "SMTP Settings"
+msgstr "SMTP-Einstellungen"
+
+#: include/TheBot/Settings/SettingsMailer.php:190
+msgid "Enable"
+msgstr "Aktivieren"
+
+#: include/TheBot/Settings/SettingsMailer.php:196
+#: include/TheBot/Settings/SettingsMailer.php:228
+#: include/TheBot/Settings/SettingsMailer.php:316
+#: include/TheBot/Settings/SettingsMailer.php:331
+msgid "Enable SMTP Delivery"
+msgstr "SMT-Versand aktivieren"
+
+#: include/TheBot/Settings/SettingsMailer.php:207
+msgid "Host"
+msgstr "Servername"
+
+#: include/TheBot/Settings/SettingsMailer.php:222
+msgid "Port"
+msgstr "Port"
+
+#: include/TheBot/Settings/SettingsMailer.php:236
+msgid "SMTP Secure"
+msgstr "SMTP-Verschlüsselung"
+
+#: include/TheBot/Settings/SettingsMailer.php:242
+#: include/TheBot/Settings/SettingsMailer.php:278
+#: include/TheBot/Settings/SettingsMailer.php:292
+msgid "SMTP Authentication"
+msgstr "SMTP Authentifizierung"
+
+#: include/TheBot/Settings/SettingsMailer.php:245
+msgid "None"
+msgstr "Keine"
+
+#: include/TheBot/Settings/SettingsMailer.php:246
+msgid "SSL"
+msgstr "SSL"
+
+#: include/TheBot/Settings/SettingsMailer.php:247
+msgid "TLS"
+msgstr "TLS"
+
+#: include/TheBot/Settings/SettingsMailer.php:257
+msgid "Allow Insecure"
+msgstr "Unsichere Verbindungen erlauben"
+
+#: include/TheBot/Settings/SettingsMailer.php:263
+msgid "Allow all Certificates"
+msgstr "Alle Zertifikate zulassen"
+
+#: include/TheBot/Settings/SettingsMailer.php:272
+msgid "SMTP Auth"
+msgstr "SMTP Auth"
+
+#: include/TheBot/Settings/SettingsMailer.php:286
+msgid "SMTP Auth Type"
+msgstr "SMTP Auth-Typ"
+
+#: include/TheBot/Settings/SettingsMailer.php:295
+msgid "Try all"
+msgstr "Alle versuchen"
+
+#: include/TheBot/Settings/SettingsMailer.php:296
+msgid "MD5 Challenge-Response"
+msgstr "MD5 Challenge-Response"
+
+#: include/TheBot/Settings/SettingsMailer.php:297
+msgid "Login"
+msgstr "Login"
+
+#: include/TheBot/Settings/SettingsMailer.php:298
+msgid "Plain"
+msgstr "Plain"
+
+#: include/TheBot/Settings/SettingsMailer.php:299
+msgid "OAuth 2.0"
+msgstr "OAuth 2.0"
+
+#: include/TheBot/Settings/SettingsMailer.php:310
+msgid "SMTP Auth Username"
+msgstr "SMTP-Benutzername"
+
+#: include/TheBot/Settings/SettingsMailer.php:325
+msgid "SMTP Auth Password"
+msgstr "SMTP-Passwort"
+
+# @ fromthebot
+#~ msgid "From the Bot"
+#~ msgstr "Vom Roboter"
+
+# @ fromthebot
+#~ msgid "Set WordPress’ email from"
+#~ msgstr "WordPress’ Absender-Adresse"
+
+# @ fromthebot
+#~ msgid "Mail From the Bot"
+#~ msgstr "Post vom Roboter"

@@ -1,0 +1,18 @@
+{
+  "modules": {
+    "compat": {},
+    "git": {},
+    "settings": {
+      "Mailer": {
+        "css": true
+      }
+    }
+  },
+  "plugin_author": "J\u00f6rn Lund",
+  "plugin_author_uri": "",
+  "plugin_name": "WP-Sincerely-The-Bot",
+  "plugin_namespace": "TheBot",
+  "plugin_slug": "the-bot",
+  "this_year": 2018,
+  "wp_plugin_slug": "wp-the-bot"
+}
