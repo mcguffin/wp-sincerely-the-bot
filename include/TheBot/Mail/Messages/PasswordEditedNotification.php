@@ -13,6 +13,7 @@ if ( ! defined('ABSPATH') ) {
 
 use TheBot\Core;
 use TheBot\Mail;
+use TheBot\Settings;
 
 class PasswordEditedNotification extends Mail\Message {
 

@@ -76,7 +76,7 @@ class SettingsTabMessages extends SettingsTab {
 
 		$core = Core\Core::instance();
 
-		wp_enqueue_style('thebot-settings-mailer', $core->get_asset_url( 'css/admin/settings/mailer.css' ), array( 'jquery' ) );
+		wp_enqueue_style('thebot-settings-mailer', $core->get_asset_url( 'css/admin/settings/mailer.css' ), array() );
 		wp_enqueue_script('thebot-settings-mailer', $core->get_asset_url( 'js/admin/settings/mailer.js' ), array( 'jquery' ) );
 		wp_localize_script('thebot-settings-mailer','thebot_mailer',[
 			'ajax'	=> [
@@ -119,7 +119,7 @@ class SettingsTabMessages extends SettingsTab {
 					$settings_section,
 					[
 						'label_for'	=> '',
-						'class'		=> '',
+						'class'		=> 'thebot-message',
 						'message'	=> $message,
 					]
 				);
@@ -132,18 +132,23 @@ class SettingsTabMessages extends SettingsTab {
 
 	public function mail_ui( $args ) {
 
-		extract($args); /*  */
+		extract($args); /* $label_for, $class, $message */
 
 		$mail = Mail\Mail::instance();
 
 		?>
-		<div>
-			<?php
+		<div class="wrap">
+			<div class="title">
+				<?php
 
-			if ( $message->supports('disable') ) {
-				$opt = new Option( $this->optionset, $message->get_option('disabled') );
-				$opt->ui_boolean();
-			}
+				printf( '<h4>%s</h4>', $message->title );
+				printf( '<p class="description">%s</p>', $message->description );
+
+				?>
+			</div>
+			<div class="subject">
+				<h4><?php _e('Subject','wp-the-bot'); ?></h4>
+				<?php
 
 
 			if ( $message->supports('custom_subject') ) {
@@ -152,41 +157,52 @@ class SettingsTabMessages extends SettingsTab {
 
 				$opt = new Option( $this->optionset, $message->get_option('subject') );
 				$opt->ui();
+			} else {
+				?>
+				<p class="description">
+					<?php _e('- Not Supported -','wp-the-bot'); ?>
+				</p>
+				<?php
 			}
-			?>
-		</div>
-		<?php
-
-
-		?>
-		<div>
+				?>
+			</div>
 			<?php
+
+			?>
+			<div class="template">
+				<h4><?php _e('Template','wp-the-bot'); ?></h4>
+				<?php
 
 			$opt = new Option( $this->optionset, $message->get_option('html') );
 			$opt->ui_boolean();
 
-			?>
+				if ( $message->supports( 'custom_template' ) ) {
 
 
-			<?php if ( $message->supports( 'custom_template' ) ) { ?>
+					$opt = new Option( $this->optionset, $message->get_option('custom_template') );
+					$opt->ui_boolean();
 
-				<!-- if in theme: show path, and edit link -->
-				<?php
+					echo $this->get_theme_ui( $message->id );
 
-
-				$opt = new Option( $this->optionset, $message->get_option('custom_template') );
-				$opt->ui_boolean();
-
-				echo $this->get_theme_ui( $message->id );
-
+				} else {
+					?>
+					<p class="description">
+						<?php _e('- Not Supported -','wp-the-bot'); ?>
+					</p>
+					<?php	
+				}
 				?>
-			<?php } ?>
 
+			</div>
+			<div class="misc">
+				<h4><?php _e('Options','wp-the-bot'); ?></h4>
+				<?php
+				$message->settings_ui( $this->optionset );
+				?>
+			</div>
 		</div>
 		<?php
-		$message->settings_ui( $this->optionset );
 
-		printf( '<p class="description">%s</p>', $message->description );
 
 	}
 

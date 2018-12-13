@@ -130,6 +130,11 @@ abstract class Message extends Core\PluginComponent {
 	 *	Print additional settings UI
 	 */
 	public function settings_ui($optionset) {
+		?>
+		<p class="description">
+			<?php _e('- no Options -','wp-the-bot'); ?>
+		</p>
+		<?php
 	}
 
 	/**

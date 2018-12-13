@@ -34,7 +34,8 @@ class WPMU extends Core\PluginComponent {
 	 *	@action init
 	 */
 	public function init() {
-		Mail\Messages\WPMUWelcomeUser::instance();		
+		Mail\Messages\WPMUWelcomeUser::instance();
+		Mail\Messages\WPMUWelcomeBlog::instance();		
 	}
 
 	/**

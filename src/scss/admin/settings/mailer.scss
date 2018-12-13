@@ -1,3 +1,34 @@
 @import '../../variables/variables';
 
 @import '../../mixins/mixins';
+
+.thebot-message {
+	background-color:#fff;
+	th {
+		display:none;
+	}
+	td {
+		.form-table & {
+			padding:15px;
+			border-bottom:10px solid $wp-gray;
+		}
+		h4 {
+			margin-top:0.25em;
+		}
+	}
+	.wrap {
+		display: flex;
+		label {
+			display:block;
+		}
+		& > * {
+			flex:1;
+			padding-right:15px;
+			margin-right:15px;
+			border-right:1px solid $wp-gray-dark;
+			&:last-of-type {
+				border-right-style:none;
+			}
+		}
+	}
+}

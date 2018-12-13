@@ -51,7 +51,7 @@ class Settings extends Core\PluginComponent {
 			/*/
 			$s = CoreSettings\SettingsPageMailer::instance();
 			remove_action( 'admin_menu', array( $s, 'admin_menu' ) );
-			remove_action( 'admin_menu', array( $s, 'admin_menu' ) );
+			remove_action( 'admin_init', array( $s, 'register_settings' ) );
 			//*/
 
 

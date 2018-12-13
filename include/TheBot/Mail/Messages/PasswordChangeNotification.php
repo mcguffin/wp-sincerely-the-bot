@@ -13,6 +13,7 @@ if ( ! defined('ABSPATH') ) {
 
 use TheBot\Core;
 use TheBot\Mail;
+use TheBot\Settings;
 
 class PasswordChangeNotification extends Mail\Message {
 
@@ -62,7 +63,15 @@ class PasswordChangeNotification extends Mail\Message {
 
 	}
 
+	/**
+	 *	@inheritdoc
+	 */
+	public function settings_ui( $optionset ) {
 
+		$opt = new Settings\Option( $optionset, $this->get_option('disabled') );
+		$opt->ui_boolean();
+
+	}
 	/**
 	 *	@action wp_password_change_notification_email
 	 */

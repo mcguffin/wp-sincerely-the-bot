@@ -51,7 +51,7 @@ function concat_js( src, dest ) {
 
 // scss admin tasks
 gulp.task( 'scss:admin', function(){
-	return do_js( 'admin/settings/mailer');
+	return do_scss( 'admin/settings/mailer');
 } );
 
 // scss

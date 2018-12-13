@@ -15,12 +15,12 @@ use TheBot\Core;
 use TheBot\Mail;
 use TheBot\Settings;
 
-class WPMUWelcomeUser extends Mail\Message {
+class WPMUWelcomeBlog extends Mail\Message {
 
 	/**
 	 *	@inheritdoc
 	 */
-	protected $id = 'user/wpmu-welcome-user';
+	protected $id = 'user/wpmu-welcome-blog';
 
 	/**
 	 *	@inheritdoc
@@ -59,22 +59,22 @@ class WPMUWelcomeUser extends Mail\Message {
 			->add_option( new Core\Option\Boolean( 'no_password', false, __('Send Password Reset Link instead of plain Password','wp-the-bot'), $this->id ) )
 			->add_option( new Core\Option\Boolean( 'custom_template', false, __('Custom Template','wp-the-bot'), $this->id ) )
 			->add_option( new Core\Option\Boolean( 'custom_subject', false, __('Custom Subject','wp-the-bot'), $this->id ) )
-			->add_option( new Core\Option\Text( 'subject', __( 'New %1$s User: %2$s' ), __('Subject','wp-the-bot'), $this->id ) );
+			->add_option( new Core\Option\Text( 'subject', __( 'New %1$s Site: %2$s' ), __('Subject','wp-the-bot'), $this->id ) );
 
-		$this->title = __('New User Welcome','wp-the-bot');
-		$this->description = __('Welcome Mail for a new Network User Account.','wp-the-bot');
+		$this->title = __('New Blog Welcome','wp-the-bot');
+		$this->description = __('Welcome Mail for a new Blog.','wp-the-bot');
 
 
 		if ( $this->get_option('disabled')->value ) {
-			add_filter( 'wpmu_welcome_user_notification', '__return_false' );
+			add_filter( 'wpmu_welcome_notification', '__return_false' );
 		}
 
 		if ( $this->get_option('custom_subject')->value ) {
-			add_filter('update_welcome_user_subject', [ $this, 'subject' ] );
+			add_filter('update_welcome_subject', [ $this, 'subject' ] );
 		}
 
 		if ( $this->get_option('custom_template')->value ) {
-			add_filter('update_welcome_user_email', [ $this, 'body' ], 10, 4 );
+			add_filter('update_welcome_email', [ $this, 'body' ], 10, 6 );
 		}
 
 	}
@@ -92,18 +92,18 @@ class WPMUWelcomeUser extends Mail\Message {
 	}
 
 	/**
-	 *	@filter retrieve_password_title
+	 *	@filter update_welcome_subject
 	 */
 	public function subject( $title, $user_login, $user_data ) {
 		return $this->get_option('custom_subject')->value;
 	}
 
 	/**
-	 *	@filter retrieve_password_message
+	 *	@filter update_welcome_email
 	 */
-	public function body( $message, $user_id, $password, $meta ) {
+	public function body( $welcome_email, $blog_id, $user_id, $password, $title, $meta ) {
 
-		$user = get_userdata($user_id);
+		$user = get_userdata( $user_id );
 
 		$pw_reset_url = false;
 
