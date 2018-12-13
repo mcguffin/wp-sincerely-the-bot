@@ -27,7 +27,8 @@ class WPMU extends Core\PluginComponent {
 		Settings::instance();
 		Users::instance();
 
-		add_action( 'init', [ $this, 'init' ] );
+		$this->init();
+
 	}
 
 	/**
@@ -35,7 +36,7 @@ class WPMU extends Core\PluginComponent {
 	 */
 	public function init() {
 		Mail\Messages\WPMUWelcomeUser::instance();
-		Mail\Messages\WPMUWelcomeBlog::instance();		
+		Mail\Messages\WPMUWelcomeBlog::instance();
 	}
 
 	/**

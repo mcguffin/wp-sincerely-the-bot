@@ -22,7 +22,7 @@ class Core extends Plugin {
 	protected function __construct() {
 
 		add_action( 'plugins_loaded' , array( $this , 'init_compat' ), 0 );
-		add_action( 'init' , array( $this , 'init' ) );
+		add_action( 'plugins_loaded' , array( $this , 'init' ) );
 
 		add_action( 'wp_enqueue_scripts' , array( $this , 'wp_enqueue_style' ) );
 
@@ -67,22 +67,25 @@ class Core extends Plugin {
 	public function wp_enqueue_style() {
 	}
 
+	/**
+	 *	@action phpmailer_init
+	 */
 	public function configure_mailer( &$phpmailer ) {
 		// set from
-		if ( $from = get_option( 'thebot_mailer_from' ) ) {
-			$phpmailer->setFrom( $from, get_option( 'thebot_mailer_from_name' ), false );
+		if ( $from = $this->get_option( 'mailer_from' )->value ) {
+			$phpmailer->setFrom( $from, $from, false );
 		}
 
-		if ( get_option('thebot_mailer_smtp') ) {
-			$port = intval(get_option('thebot_mailer_smtp_port'));
+		if ( $this->get_option('mailer_smtp')->value ) {
+			$port = intval( $this->get_option('mailer_smtp_port')->value );
 			$phpmailer->isSMTP();
-			$phpmailer->Host = get_option('thebot_mailer_smtp_host'); //'wp194.webpack.hosteurope.de';
+			$phpmailer->Host = $this->get_option('mailer_smtp_host')->value;// get_option('thebot_mailer_smtp_host'); //'wp194.webpack.hosteurope.de';
 			$phpmailer->Port = $port ? $port : 25;
 
-			if ( $secure = get_option('thebot_mailer_smtp_secure') ) {
+			if ( $secure = $this->get_option('mailer_smtp_secure')->value ) {
 				$phpmailer->SMTPSecure = $secure;
 			}
-			if ( get_option('thebot_mailer_smtp_all_certs') ) {
+			if ( $this->get_option('mailer_smtp_all_certs')->value ) {
 				$phpmailer->SMTPOptions = array(
 					'ssl' => array(
 						'verify_peer' => false,
@@ -91,11 +94,12 @@ class Core extends Plugin {
 					)
 				);
 			}
-			if ( get_option('thebot_mailer_smtp_auth') ) {
+
+			if ( $this->get_option('mailer_smtp_auth')->value ) {
 				$phpmailer->SMTPAuth = true;
-				$phpmailer->AuthType = get_option('thebot_mailer_smtp_auth_type');
-				$phpmailer->Username = get_option('thebot_mailer_smtp_auth_user');
-				$phpmailer->Password = get_option('thebot_mailer_smtp_auth_pass');
+				$phpmailer->AuthType = $this->get_option('mailer_smtp_auth_type')->value;
+				$phpmailer->Username = $this->get_option('mailer_smtp_auth_user')->value;
+				$phpmailer->Password = $this->get_option('mailer_smtp_auth_pass')->value;
 			}
 		}
 	}

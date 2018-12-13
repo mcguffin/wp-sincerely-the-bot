@@ -63,12 +63,12 @@ abstract class Message extends Core\PluginComponent {
 
 		$args = func_get_args();
 		parent::__construct( ...$args );
+
 		$this
-			->add_option( new Core\Option\Boolean( 'html', false, __('HTML','wp-the-bot'), $this->id ) );
+			->add_option( new Core\Option\Boolean( 'html', false, __( 'HTML', 'wp-the-bot' ), $this->id ) );
 
-		add_filter('thebot_mail_defaults', [ $this, 'add_default_settings'] );
-		add_filter('thebot_messages', [ $this, 'add_self' ], 10, 2 );
-
+		add_filter( 'thebot_messages', [ $this, 'add_self' ], 10, 2 );
+		add_action( 'plugins_loaded', [ $this, 'init' ], 20 );
 
 	}
 
@@ -136,6 +136,13 @@ abstract class Message extends Core\PluginComponent {
 		</p>
 		<?php
 	}
+
+	/**
+	 *	@action plugins_loaded:20
+	 */
+	public function init() {
+	}
+
 
 	/**
 	 *	@inheritdoc

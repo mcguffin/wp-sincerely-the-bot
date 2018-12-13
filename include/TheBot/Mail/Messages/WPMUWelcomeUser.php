@@ -64,6 +64,12 @@ class WPMUWelcomeUser extends Mail\Message {
 		$this->title = __('New User Welcome','wp-the-bot');
 		$this->description = __('Welcome Mail for a new Network User Account.','wp-the-bot');
 
+	}
+
+	/**
+	 *	@inheritdoc
+	 */
+	public function init() {
 
 		if ( $this->get_option('disabled')->value ) {
 			add_filter( 'wpmu_welcome_user_notification', '__return_false' );
@@ -78,6 +84,7 @@ class WPMUWelcomeUser extends Mail\Message {
 		}
 
 	}
+
 	/**
 	 *	@inheritdoc
 	 */
@@ -108,7 +115,8 @@ class WPMUWelcomeUser extends Mail\Message {
 		$pw_reset_url = false;
 
 		if ( $this->get_option('no_password')->value ) {
-			$message = str_replace('PASSWORD',__('Please enter under the following link:','wp-the-bot'), $message );
+
+			$message = str_replace('PASSWORD',__('Please reset under the following URL:','wp-the-bot'), $message );
 
 			$password = false;
 
@@ -126,8 +134,8 @@ class WPMUWelcomeUser extends Mail\Message {
 		}
 
 		$vars = [
-			'user_login'		=> $user_data->user_login,
-			'user_email'		=> $user_data->user_email,
+			'user_login'		=> $user->user_login,
+			'user_email'		=> $user->user_email,
 			'user_id'			=> $user_id,
 			'password'			=> $password,
 			'confirmation_url'	=> $pw_reset_url,

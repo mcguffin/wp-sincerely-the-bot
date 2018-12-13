@@ -59,12 +59,18 @@ class RequestPasswordReset extends Mail\Message {
 		$this
 			->add_option( new Core\Option\Boolean( 'custom_template', false, __('Custom Template','wp-the-bot'), $this->id ) )
 			->add_option( new Core\Option\Boolean( 'custom_subject', '', __('Custom Subject','wp-the-bot'), $this->id ) )
-			->add_option( new Core\Option\Text( 'subject', __( '[%s] Password Reset', 'wp-the-bot' ), __('Subject','wp-the-bot'), $this->id ) );
+			->add_option( new Core\Option\Text( 'subject', __( '[%s] Password Reset' ), __('Subject','wp-the-bot'), $this->id ) );
 		//*/
 
 		$this->title = __('Lost Password','wp-the-bot');
 		$this->description = __('Sent to the User when he/she requests a Password Reset on the WP-Login-Page.','wp-the-bot');
 
+	}
+
+	/**
+	 *	@inheritdoc
+	 */
+	public function init() {
 		if ( $this->get_option('custom_subject')->value ) {
 			add_filter('retrieve_password_title', [$this,'subject'], 10, 3 );
 		}
@@ -73,7 +79,6 @@ class RequestPasswordReset extends Mail\Message {
 			add_filter('retrieve_password_message', [$this,'body'], 10, 4 );
 		}
 	}
-
 
 	/**
 	 *	@filter retrieve_password_title

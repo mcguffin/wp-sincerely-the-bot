@@ -15,23 +15,20 @@ use TheBot\Core;
 use TheBot\Mail;
 use TheBot\Settings;
 
-class PasswordChangeNotification extends Mail\Message {
+class NewUserNotificationAdmin extends NewUserNotification {
 
 	/**
 	 *	@inheritdoc
 	 */
-	protected $id = 'admin/password-change-notification';
+	protected $id = 'admin/new-user-notification';
+
 
 	/**
 	 *	@inheritdoc
 	 */
-	protected $context = 'network';
+	protected $capabilities = ['manage_users'];
 
-	/**
-	 *	@inheritdoc
-	 */
-	protected $capabilities = [ 'create_users', 'delete_users', 'promote_users' ];
-	// wait ... only blog context...?
+
 
 	/**
 	 *	@inheritdoc
@@ -44,22 +41,28 @@ class PasswordChangeNotification extends Mail\Message {
 		parent::__construct( ...$args );
 
 		$this->add_support('html')
-			->add_support('disable')
 			->add_support('custom_subject')
 			->add_support('custom_template')
-			->add_support('custom_recipient');
+			->add_support('custom_recipients');
 
+		/*
+		$this->default( 'subject', ; // %s: site name
+		/*/
 		$this
-			->add_option( new Core\Option\Boolean( 'disabled', false, __('Disabled','wp-the-bot'), $this->id ) )
 			->add_option( new Core\Option\Boolean( 'custom_template', false, __('Custom Template','wp-the-bot'), $this->id ) )
-			->add_option( new Core\Option\Boolean( 'custom_subject', false, __('Custom Subject','wp-the-bot'), $this->id ) )
-			->add_option( new Core\Option\Text( 'subject', __( '[%s] Password Changed' ), __('Subject','wp-the-bot'), $this->id ) );
+			->add_option( new Core\Option\Boolean( 'custom_subject', '', __('Custom Subject','wp-the-bot'), $this->id ) )
+			->add_option( new Core\Option\Text( 'subject', __( '[%s] New User Registration' ), __('Subject','wp-the-bot'), $this->id ) );
+		//*/
 
+		$this->title = __('New User Notification (Admin)','wp-the-bot');
 
-		add_filter('wp_password_change_notification_email', [ $this, 'mail_hook' ], 10, 3 );
+		if ( is_multisite( ) ) {
+			$this->description = __('Sent to the Admin of the main blog on account creation.','wp-the-bot');
+		} else {
+			$this->description = __('Sent to the Blog Admin on account creation.','wp-the-bot');
+		}
 
-		$this->title = __('Password Changed','wp-the-bot');
-		$this->description = __('Sent to the Admin when a User Password has been changed.','wp-the-bot');
+		add_filter('wp_new_user_notification_email_admin', [ $this, 'mail_hook' ], 10, 3 );
 
 	}
 
@@ -67,11 +70,14 @@ class PasswordChangeNotification extends Mail\Message {
 	 *	@inheritdoc
 	 */
 	public function settings_ui( $optionset ) {
-
-		$opt = new Settings\Option( $optionset, $this->get_option('disabled') );
-		$opt->ui_boolean();
+		?>
+		<p class="description">
+			<?php _e( 'Disabling: If the user does not receive a Message, the blog admin also won‘t get one.', 'wp-the-bot' ); ?>
+		</p>
+		<?php
 
 	}
+
 	/**
 	 *	@action wp_password_change_notification_email
 	 */
@@ -86,13 +92,11 @@ class PasswordChangeNotification extends Mail\Message {
 		if ( $this->get_option('html')->value ) {
 			$mails->set_html();
 			if ( $this->get_option('custom_template')->value ) {
-
 				$vars = [
 					'user_login'		=> $user->user_login,
 					'user_email'		=> $user->user_email,
 					'admin_email'		=> get_option( 'admin_email' ),
 				];
-
 				$email['message'] = $mails->render_email( $this->id, $vars );
 
 			} else {
@@ -100,11 +104,14 @@ class PasswordChangeNotification extends Mail\Message {
 			}
 		}
 
-		// get subscribers!
-		// if ( $this->get_option('override_recipient') ) {
-		// 	$email['to'] = $this->option('recipients');
+		// get subscribers
+		// if ( $this->option('override_recipient') ) {
+		// 	$email['to'] = implode(',', [ $email['to'], $this->option('recipients') ]);
 		// }
+		//
 		return $email;
 	}
+
+
 
 }

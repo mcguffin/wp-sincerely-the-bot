@@ -21,11 +21,13 @@ class Mail extends Core\Singleton {
 	 *	@inheritdoc
 	 */
 	protected function __construct() {
-
+		// @plugins_loaded:10
 		$args = func_get_args();
 		parent::__construct( ...$args );
 
 
+		Messages\NewUserNotification::instance();
+		Messages\NewUserNotificationAdmin::instance();
 
 		Messages\RequestPasswordReset::instance();
 		Messages\PasswordChangeNotification::instance();
@@ -69,6 +71,9 @@ class Mail extends Core\Singleton {
 	}
 
 
+	/**
+	 *	render custom mail tempalte
+	 */
 	public function render_email( $template, $vars ) {
 		ob_start();
 		global $thebot_styles;
@@ -76,13 +81,17 @@ class Mail extends Core\Singleton {
 		$this->set_html();
 
 		$thebot_styles	= include $this->get_template_file( 'styles' );
+
 		$this->render_template( 'header', $vars );
 		$this->render_template( $template, $vars );
 		$this->render_template( 'footer', $vars );
+
 		return ob_get_clean();
 
 	}
-
+	/**
+	 *	Add header and footer to default wp mail
+	 */
 	public function wrap_email( $text ) {
 		ob_start();
 		global $thebot_styles;
@@ -97,6 +106,9 @@ class Mail extends Core\Singleton {
 
 	}
 
+	/**
+	 *	render a template file
+	 */
 	public function render_template( $template, $vars = [] ) {
 		//$network_name = get_network()->site_name;
 
@@ -119,7 +131,7 @@ class Mail extends Core\Singleton {
 	 *	@return null|string path of theme file or null
 	 */
 	public function get_template_file( $template ) {
-		if ( $file = apply_filters( "thebot_template_file_{$template}", $file, $template ) ) {
+		if ( $file = apply_filters( "thebot_template_file_{$template}", false, $template ) ) {
 			return $file;
 		}
 
@@ -141,12 +153,12 @@ class Mail extends Core\Singleton {
 	 *	@return null|string path of theme file or null
 	 */
 	final public function get_theme_file( $template, $rel = false ) {
-		$rel = $this->get_rel_file( $template );
+		$rel_file = $this->get_rel_file( $template );
 		$lookup = [
-			get_stylesheet_directory() .  '/' . $rel
-				=> get_stylesheet() . '/' . $rel,
-			get_template_directory() .  '/' . $rel
-				=> get_template() . '/' . $rel,
+			get_stylesheet_directory() .  '/' . $rel_file
+				=> get_stylesheet() . '/' . $rel_file,
+			get_template_directory() .  '/' . $rel_file
+				=> get_template() . '/' . $rel_file,
 		];
 		foreach ( array_unique( $lookup ) as $abspath => $relpath ) {
 			if ( file_exists( $abspath ) ) {

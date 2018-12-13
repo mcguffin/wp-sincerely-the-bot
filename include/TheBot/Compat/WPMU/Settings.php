@@ -20,10 +20,24 @@ use TheBot\Settings as CoreSettings;
 class Settings extends Core\PluginComponent {
 	private $options = array(
 	);
+
 	/**
 	 *	@inheritdoc
 	 */
 	protected function __construct() {
+		
+		$core = Core\Core::instance();
+		$mail = Mail\Mail::instance();
+
+		foreach ( $core->get_options() as $option ) {
+			$option->multisite = true;
+		}
+		foreach ( $mail->get_messages( 'network' ) as $message ) {
+			foreach ( $message->get_options() as $option ) {
+				$option->multisite = true;
+			}
+		}
+
 		// wpmu-settings
 		if ( is_network_admin() ) {
 
@@ -32,18 +46,6 @@ class Settings extends Core\PluginComponent {
 			add_action( 'network_admin_menu', array( $this, 'network_admin_menu' ));
 
 			//remove_action( 'admin_menu', array( $settings, 'admin_menu' ) );
-
-			$core = Core\Core::instance();
-			$mail = Mail\Mail::instance();
-
-			foreach ( $core->get_options() as $option ) {
-				$option->multisite = true;
-			}
-			foreach ( $mail->get_messages( 'network' ) as $message ) {
-				foreach ( $message->get_options() as $option ) {
-					$option->multisite = true;
-				}
-			}
 
 		} else {
 			/*
@@ -87,6 +89,7 @@ class Settings extends Core\PluginComponent {
 
 			$core = Core\Core::instance();
 			$mail = Mail\Mail::instance();
+			$settings = CoreSettings\SettingsTabMailer::instance();
 
 			$core->maybe_save_options();
 			foreach ( $mail->get_messages( 'network' ) as $message ) {

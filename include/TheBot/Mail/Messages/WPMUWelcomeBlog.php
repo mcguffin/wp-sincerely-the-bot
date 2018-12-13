@@ -65,6 +65,13 @@ class WPMUWelcomeBlog extends Mail\Message {
 		$this->description = __('Welcome Mail for a new Blog.','wp-the-bot');
 
 
+	}
+
+	/**
+	 *	@inheritdoc
+	 */
+	public function init() {
+
 		if ( $this->get_option('disabled')->value ) {
 			add_filter( 'wpmu_welcome_notification', '__return_false' );
 		}
@@ -76,8 +83,8 @@ class WPMUWelcomeBlog extends Mail\Message {
 		if ( $this->get_option('custom_template')->value ) {
 			add_filter('update_welcome_email', [ $this, 'body' ], 10, 6 );
 		}
-
 	}
+
 	/**
 	 *	@inheritdoc
 	 */
@@ -101,14 +108,13 @@ class WPMUWelcomeBlog extends Mail\Message {
 	/**
 	 *	@filter update_welcome_email
 	 */
-	public function body( $welcome_email, $blog_id, $user_id, $password, $title, $meta ) {
+	public function body( $message, $blog_id, $user_id, $password, $title, $meta ) {
 
 		$user = get_userdata( $user_id );
 
 		$pw_reset_url = false;
 
-		if ( $this->get_option('no_password')->value ) {
-			$message = str_replace('PASSWORD',__('Please enter under the following link:','wp-the-bot'), $message );
+		if ( did_action( 'network_site_new_created_user' ) && $this->get_option('no_password')->value ) {
 
 			$password = false;
 
@@ -116,18 +122,24 @@ class WPMUWelcomeBlog extends Mail\Message {
 				'action'	=> 'rp',
 				'key'		=> get_password_reset_key( $user ),
 				'login'		=> rawurlencode( $user->user_login ),
-			], network_site_url( 'wp-login.php' ) );
+			], trailingslashit( get_blogaddress_by_id( $blog_id ) ) . 'wp-login.php' );
 
-			$message = str_replace('LOGINLINK', $pw_reset_url, $message );
+			$message = str_replace('PASSWORD',
+				sprintf( __('Click here %s','wp-the-bot'), $pw_reset_url ),
+				$message
+			);
+
 		}
 
 		if ( ! $this->get_option('html')->value ) {
 			return $message;
 		}
-
+		$blog = get_site( $blog_id );
 		$vars = [
-			'user_login'		=> $user_data->user_login,
-			'user_email'		=> $user_data->user_email,
+			'user_login'		=> $user->user_login,
+			'user_email'		=> $user->user_email,
+			'blog_name'			=> $blog->blogname,
+			'blog_url'			=> $blog->siteurl,
 			'user_id'			=> $user_id,
 			'password'			=> $password,
 			'confirmation_url'	=> $pw_reset_url,

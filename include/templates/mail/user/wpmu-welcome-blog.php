@@ -5,6 +5,8 @@
  *	Available vars:
  *	- $site_name
  *	- $site_url
+ *	- $blog_name
+ *	- $blog_url
  *	- $user_login
  *	- $user_email
  *	- $password
@@ -14,16 +16,17 @@
 
 ?>
 <h2><?php printf(__('Howdy %s','wp-the-bot'), $user_login ); ?></h2>
-<p><?php _e( 'A brand new User Account has just been created for you:', 'wp-the-bot'); ?></p>
+<p><?php _e( 'A brand new Site has just been created for you:', 'wp-the-bot'); ?></p>
 <p>
-	<?php printf( __( 'Site Name: %s','wp-the-bot'), sprintf( '<strong>%s</strong>', $site_name ) ) ?><br />
-	<?php printf( __( 'Username: %s','wp-the-bot'), sprintf( '<strong>%s</strong>', $user_login ) ); ?>
+	<?php printf( __( 'Site Name: %s','wp-the-bot'), sprintf( '<strong>%s</strong>', $blog_name ) ) ?><br />
+	<?php printf( __( 'Site URL: %s','wp-the-bot'), sprintf( '<strong>%s</strong>', $blog_url ) ) ?><br />
+	<?php printf( __( 'Your Username: %s','wp-the-bot'), sprintf( '<strong>%s</strong>', $user_login ) ) ?>
 	<?php
 	if ( ! empty( $password ) ) {
 		?>
 		<br />
 		<?php
-		printf( __( 'Username: %s','wp-the-bot'), sprintf( '<strong>%s</strong>', $user_login ) );
+		printf( __( 'Password: %s','wp-the-bot'), sprintf( '<strong>%s</strong>', $password ) );
 	}
 	?>
 </p>
