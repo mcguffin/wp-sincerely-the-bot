@@ -36,6 +36,11 @@ abstract class Singleton {
 		return self::$instances[ $class ];
 	}
 
+	public function destroy() {
+		$class = get_class( $this );
+		unset( self::$instances[ $class ] );
+	}
+
 	/**
 	 *	Prevent Instantinating
 	 */

@@ -12,6 +12,7 @@ if ( ! defined('ABSPATH') ) {
 }
 
 use TheBot\Compat;
+use TheBot\Mail;
 
 class Core extends Plugin {
 
@@ -26,6 +27,33 @@ class Core extends Plugin {
 		add_action( 'wp_enqueue_scripts' , array( $this , 'wp_enqueue_style' ) );
 
 		add_action( 'phpmailer_init' , array( $this, 'configure_mailer') );
+
+		$this
+			->add_option( new Option\Email( 'mailer_from', '', __( 'From Address', 'wp-the-bot' ) ) )
+			->add_option( new Option\Text( 'mailer_from_name', '', __( 'From Name', 'wp-the-bot' ) ) )
+			->add_option( new Option\Boolean( 'mailer_smtp', '', __( 'Enable SMTP', 'wp-the-bot' ) ) )
+			->add_option( new Option\Text( 'mailer_smtp_host', '', __( 'Hostname', 'wp-the-bot' ) ) )
+			->add_option( new Option\Absint( 'mailer_smtp_port', 587, __( 'Port', 'wp-the-bot' ) ) )
+			->add_option( new Option\ChoiceRadio( 'mailer_smtp_secure',	'',	__( 'Encryption', 'wp-the-bot' ) ) )
+			->add_option( new Option\Boolean( 'mailer_smtp_all_certs', false, __( 'Allow all Certificates',  'wp-the-bot' ) ) )
+			->add_option( new Option\Boolean( 'mailer_smtp_auth', false, __( 'SMTP Authentication',  'wp-the-bot' ) ) )
+			->add_option( new Option\ChoiceRadio( 'mailer_smtp_auth_type', '', __( 'SMTP Auth Type', 'wp-the-bot' ) ) )
+			->add_option( new Option\Text( 'mailer_smtp_auth_user', '', __( 'SMTP User', 'wp-the-bot' ) ) )
+			->add_option( new Option\Text( 'mailer_smtp_auth_pass', '', __( 'SMTP Password', 'wp-the-bot' ) ) );
+
+		$this->get_option('mailer_smtp_secure')->set_choices([
+			''		=> __( 'None', 'wp-the-bot' ),
+			'ssl'	=> __( 'SSL', 'wp-the-bot' ),
+			'tls'	=> __( 'TLS', 'wp-the-bot' ),
+		]);
+
+		$this->get_option('mailer_smtp_auth_type')->set_choices([
+			''			=> __( 'Try all', 'wp-the-bot' ),
+			'CRAM-MD5'	=> __( 'MD5 Challenge-Response', 'wp-the-bot' ),
+			'LOGIN'		=> __( 'Login', 'wp-the-bot' ),
+			'PLAIN'		=> __( 'Plain', 'wp-the-bot' ),
+			'XOAUTH2'	=> __( 'OAuth 2.0', 'wp-the-bot' ),
+		]);
 
 		$args = func_get_args();
 		parent::__construct( ...$args );
@@ -79,8 +107,9 @@ class Core extends Plugin {
 	 *  @action plugins_loaded
 	 */
 	public function init_compat() {
+
 		if ( is_multisite() && function_exists('is_plugin_active_for_network') && is_plugin_active_for_network( $this->get_wp_plugin() ) ) {
-			Compat\WPMU::instance();
+			Compat\WPMU\WPMU::instance();
 		}
 	}
 
@@ -91,6 +120,7 @@ class Core extends Plugin {
 	 *  @action init
 	 */
 	public function init() {
+		Mail\Mail::instance();
 	}
 
 	/**

@@ -23,3 +23,14 @@ Installation
  - $ `cd acf-wp-objects`
  - $ `npm install`
  - $ `gulp`
+
+Future:
+-------
+ - Option to Override WP-Mail Templates
+	 - New User
+	 - Password Changed
+	 - WPMU New Blog
+	 - WPMU New User
+	 - 
+ - HTML Mails
+ - Allow Theme override

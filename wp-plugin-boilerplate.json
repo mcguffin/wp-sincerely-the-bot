@@ -1,10 +1,13 @@
 {
   "modules": {
+    "ajax": {},
     "compat": {},
     "git": {},
+    "gulp": {},
     "settings": {
-      "Mailer": {
-        "css": true
+      "PageMailer": {
+        "css": true,
+        "js": true
       }
     }
   },

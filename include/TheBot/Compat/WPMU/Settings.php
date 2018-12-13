@@ -5,7 +5,7 @@
  *	2018-09-22
  */
 
-namespace TheBot\Compat;
+namespace TheBot\Compat\WPMU;
 
 if ( ! defined('ABSPATH') ) {
 	die('FU!');
@@ -13,25 +13,49 @@ if ( ! defined('ABSPATH') ) {
 
 
 use TheBot\Core;
-use TheBot\Settings;
+use TheBot\Mail;
+use TheBot\Settings as CoreSettings;
 
 
-class WPMU extends Core\PluginComponent {
+class Settings extends Core\PluginComponent {
 	private $options = array(
 	);
 	/**
 	 *	@inheritdoc
 	 */
 	protected function __construct() {
-		$settings = Settings\SettingsMailer::instance();
-		foreach ( $settings->get_options() as $opt ) {
-			add_filter( "pre_option_{$opt}", array( $this, 'pre_option' ), 10, 2 );
+		// wpmu-settings
+		if ( is_network_admin() ) {
+
+
+			add_action( 'load-settings_page_mailer', array( $this, 'update_options' ) );
+			add_action( 'network_admin_menu', array( $this, 'network_admin_menu' ));
+
+			//remove_action( 'admin_menu', array( $settings, 'admin_menu' ) );
+
+			$core = Core\Core::instance();
+			$mail = Mail\Mail::instance();
+
+			foreach ( $core->get_options() as $option ) {
+				$option->multisite = true;
+			}
+			foreach ( $mail->get_messages( 'network' ) as $message ) {
+				foreach ( $message->get_options() as $option ) {
+					$option->multisite = true;
+				}
+			}
+
+		} else {
+			/*
+			CoreSettings\SettingsPageMailer::instance()->deinit();
+			/*/
+			$s = CoreSettings\SettingsPageMailer::instance();
+			remove_action( 'admin_menu', array( $s, 'admin_menu' ) );
+			remove_action( 'admin_menu', array( $s, 'admin_menu' ) );
+			//*/
+
+
 		}
-		add_action( 'load-settings_page_mailer', array( $this, 'update_options' ) );
-		add_action( 'network_admin_menu', array( $this, 'network_admin_menu' ));
-
-		remove_action( 'admin_menu', array( $settings, 'admin_menu' ) );
-
 	}
 
 	/**
@@ -50,29 +74,26 @@ class WPMU extends Core\PluginComponent {
 	 *	@action load-settings_page_mailer
 	 */
 	public function update_options() {
+		if ( ! is_network_admin() ) {
+			return;
+		}
 		if ( ! empty( $_POST ) ) {
+
 			check_admin_referer( 'mailer-options' );
+
 			if ( ! current_user_can( 'manage_network_options' ) ) {
 				wp_die( __('This is not allowd.','wp-the-bot') );
 			}
 
-			$settings = Settings\SettingsMailer::instance();
+			$core = Core\Core::instance();
+			$mail = Mail\Mail::instance();
 
-			foreach ( $settings->get_options() as $option ) {
-
-				$option = trim( $option );
-				$value = null;
-				if ( isset( $_POST[ $option ] ) ) {
-					$value = $_POST[ $option ];
-					if ( ! is_array( $value ) ) {
-						$value = trim( $value );
-					}
-					$value = wp_unslash( $value );
-				}
-				update_site_option( $option, $value );
+			$core->maybe_save_options();
+			foreach ( $mail->get_messages( 'network' ) as $message ) {
+				$message->maybe_save_options();
 			}
 
-			if ( isset( $_POST['test' ] ) ) {
+			if ( isset( $_POST[ 'test' ] ) ) {
 				$settings->send_testmail();
 			}
 		}
@@ -83,7 +104,8 @@ class WPMU extends Core\PluginComponent {
 	 *	@action network_admin_menu
 	 */
 	public function network_admin_menu() {
-		$settings = Settings\SettingsMailer::instance();
+		$settings = CoreSettings\SettingsPageMailer::instance();
+
 		add_submenu_page( 'settings.php' , __('WP Mailer','wp-the-bot'), __('WP Mailer','wp-the-bot'), 'manage_network_options', 'mailer', array( $settings, 'settings_page'));
 	}
 
