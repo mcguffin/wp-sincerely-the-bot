@@ -13,7 +13,7 @@ if ( ! defined('ABSPATH') ) {
 
 
 use TheBot\Core;
-use TheBot\Mail;
+// use TheBot\Mail;
 use TheBot\Settings as CoreSettings;
 
 
@@ -27,20 +27,19 @@ class Settings extends Core\PluginComponent {
 	protected function __construct() {
 		
 		$core = Core\Core::instance();
-		$mail = Mail\Mail::instance();
+		// $mail = Mail\Mail::instance();
 
 		foreach ( $core->get_options() as $option ) {
 			$option->multisite = true;
 		}
-		foreach ( $mail->get_messages( 'network' ) as $message ) {
-			foreach ( $message->get_options() as $option ) {
-				$option->multisite = true;
-			}
-		}
+		// foreach ( $mail->get_messages( 'network' ) as $message ) {
+		// 	foreach ( $message->get_options() as $option ) {
+		// 		$option->multisite = true;
+		// 	}
+		// }
 
 		// wpmu-settings
 		if ( is_network_admin() ) {
-
 
 			add_action( 'load-settings_page_mailer', array( $this, 'update_options' ) );
 			add_action( 'network_admin_menu', array( $this, 'network_admin_menu' ));
@@ -88,13 +87,13 @@ class Settings extends Core\PluginComponent {
 			}
 
 			$core = Core\Core::instance();
-			$mail = Mail\Mail::instance();
+			//$mail = Mail\Mail::instance();
 			$settings = CoreSettings\SettingsTabMailer::instance();
 
 			$core->maybe_save_options();
-			foreach ( $mail->get_messages( 'network' ) as $message ) {
-				$message->maybe_save_options();
-			}
+			// foreach ( $mail->get_messages( 'network' ) as $message ) {
+			// 	$message->maybe_save_options();
+			// }
 
 			if ( isset( $_POST[ 'test' ] ) ) {
 				$settings->send_testmail();

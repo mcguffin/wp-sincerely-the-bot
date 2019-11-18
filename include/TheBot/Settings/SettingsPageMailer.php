@@ -21,7 +21,7 @@ class SettingsPageMailer extends SettingsPage {
 
 		parent::__construct();
 
-		$this->add_tab( SettingsTabMessages::instance() );
+		//$this->add_tab( SettingsTabMessages::instance() );
 		$this->add_tab( SettingsTabMailer::instance() );
 
 

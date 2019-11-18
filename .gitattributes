@@ -6,3 +6,7 @@ gulpfile.js export-ignore
 package*.json export-ignore
 /src export-ignore
 wp-plugin-boilerplate.json export-ignore
+# TEMPORARY DISABLE MAIL FEATURES
+include/templates* export-ignore
+include/TheBot/Mail* export-ignore
+include/TheBot/Settings/SettingsTabMessages.php export-ignore

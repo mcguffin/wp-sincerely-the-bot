@@ -14,7 +14,7 @@ if ( ! defined('ABSPATH') ) {
 
 use TheBot\Core;
 use TheBot\Settings as CoreSettings;
-use TheBot\Mail;
+// use TheBot\Mail;
 
 
 class WPMU extends Core\PluginComponent {
@@ -25,7 +25,7 @@ class WPMU extends Core\PluginComponent {
 	protected function __construct() {
 
 		Settings::instance();
-		Users::instance();
+		// Users::instance();
 
 		$this->init();
 
@@ -35,8 +35,8 @@ class WPMU extends Core\PluginComponent {
 	 *	@action init
 	 */
 	public function init() {
-		Mail\Messages\WPMUWelcomeUser::instance();
-		Mail\Messages\WPMUWelcomeBlog::instance();
+		// Mail\Messages\WPMUWelcomeUser::instance();
+		// Mail\Messages\WPMUWelcomeBlog::instance();
 	}
 
 	/**

@@ -22,7 +22,7 @@ class Core extends Plugin {
 	protected function __construct() {
 
 		add_action( 'plugins_loaded' , array( $this , 'init_compat' ), 0 );
-		add_action( 'plugins_loaded' , array( $this , 'init' ) );
+		// add_action( 'plugins_loaded' , array( $this , 'init_mail' ) );
 
 		add_action( 'wp_enqueue_scripts' , array( $this , 'wp_enqueue_style' ) );
 
@@ -111,9 +111,14 @@ class Core extends Plugin {
 	 *  @action plugins_loaded
 	 */
 	public function init_compat() {
-
-		if ( is_multisite() && function_exists('is_plugin_active_for_network') && is_plugin_active_for_network( $this->get_wp_plugin() ) ) {
-			Compat\WPMU\WPMU::instance();
+	
+		if ( is_multisite() ) {
+			if ( ! function_exists('\is_plugin_active_for_network') ) {
+				require_once ABSPATH . '/wp-admin/includes/plugin.php';
+			}
+			if ( is_plugin_active_for_network( $this->get_wp_plugin() ) ) {
+				Compat\WPMU\WPMU::instance();				
+			}
 		}
 	}
 
@@ -123,9 +128,9 @@ class Core extends Plugin {
 	 *
 	 *  @action init
 	 */
-	public function init() {
-		Mail\Mail::instance();
-	}
+	// public function init_mail() {
+	// 	Mail\Mail::instance();
+	// }
 
 	/**
 	 *	Get asset url for this plugin
