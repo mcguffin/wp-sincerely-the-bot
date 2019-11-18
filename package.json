@@ -25,5 +25,27 @@
     "gulp-sourcemaps": "*",
     "gulp-uglify": "*",
     "gulp-util": "*"
+  },
+  "wporg": {
+    "steps": [
+      "build",
+      "git",
+      "github",
+      "pack"
+    ],
+    "type": "plugin",
+    "build": {
+      "prebuild": [
+        "wp i18n make-pot . languages/wp-the-bot.pot --domain=wp-the-bot --exclude=tmp"
+      ],
+      "build": []
+    },
+    "git": {
+      "host": "github.com",
+      "user": "mcguffin"
+    },
+    "wporg": {
+      "assets": ".wporg"
+    }
   }
 }
