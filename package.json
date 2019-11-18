@@ -1,6 +1,6 @@
 {
   "name": "wp-the-bot",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Plugin description",
   "private": true,
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com//wp-the-bot#readme",
   "devDependencies": {
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "*",
     "gulp-concat": "*",
     "gulp-rename": "*",
@@ -29,9 +29,7 @@
   "wporg": {
     "steps": [
       "build",
-      "git",
-      "github",
-      "pack"
+      "git"
     ],
     "type": "plugin",
     "build": {
@@ -47,5 +45,8 @@
     "wporg": {
       "assets": ".wporg"
     }
+  },
+  "dependencies": {
+    "node-sass": "^4.13.0"
   }
 }

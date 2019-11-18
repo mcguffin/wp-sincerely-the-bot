@@ -1,159 +1,403 @@
-# Copyright (C) 2018 joern
-# This file is distributed under the GNU General Public License v2 or later.
-#, fuzzy
+# Copyright (C) 2019 Jörn Lund
+# This file is distributed under the same license as the Sincerely The Bot plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Sincerely The Bot v0.0.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-02T16:54:13+00:00\n"
-"PO-Revision-Date: 2018-12-02T16:54:13+00:00\n"
-"Language-Team: \n"
+"Project-Id-Version: Sincerely The Bot 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-sincerely-the-bot\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: WP Make Pot\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
-"_n_noop:1,2;_c;_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
-"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
-"esc_html_x:1,2c\n"
-"X-Textdomain-Support: yes\n"
-"X-Poedit-Basepath: ./\n"
-"Last-Translator: \n"
-"X-Poedit-SearchPath-0: ..\n"
-"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"POT-Creation-Date: 2019-11-18T20:27:30+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: wp-the-bot\n"
 
-#: include/TheBot/Compat/WPMU.php:56
+#. Plugin Name of the plugin
+msgid "Sincerely The Bot"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "http://wordpress.org/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Enter description here."
+msgstr ""
+
+#. Author of the plugin
+msgid "Jörn Lund"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/mcguffin"
+msgstr ""
+
+#: include/templates/mail/admin/new-user-notification.php:12
+msgid "Howdy,"
+msgstr ""
+
+#: include/templates/mail/admin/new-user-notification.php:13
+msgid "a new Account on your site has just been created:"
+msgstr ""
+
+#: include/templates/mail/admin/new-user-notification.php:15
+#: include/templates/mail/user/new-user-notification.php:16
+#: include/templates/mail/user/request-password-reset.php:18
+#: include/templates/mail/user/wpmu-welcome-blog.php:21
+#: include/templates/mail/user/wpmu-welcome-user.php:19
+msgid "Site Name: %s"
+msgstr ""
+
+#: include/templates/mail/admin/new-user-notification.php:16
+#: include/templates/mail/user/new-user-notification.php:17
+#: include/templates/mail/user/request-password-reset.php:19
+#: include/templates/mail/user/wpmu-welcome-user.php:20
+#: include/templates/mail/user/wpmu-welcome-user.php:26
+msgid "Username: %s"
+msgstr ""
+
+#: include/templates/mail/admin/password-change-notification.php:16
+msgid "The Password of User %s was changed."
+msgstr ""
+
+#: include/templates/mail/footer.php:16
+msgid "This email was generated automtically by %s."
+msgstr ""
+
+#: include/templates/mail/footer.php:21
+msgid "Please do not reply to this message."
+msgstr ""
+
+#: include/templates/mail/user/new-user-notification.php:13
+#: include/templates/mail/user/password-edited-notification.php:14
+#: include/templates/mail/user/request-password-reset.php:15
+#: include/templates/mail/user/wpmu-welcome-blog.php:18
+#: include/templates/mail/user/wpmu-welcome-user.php:16
+msgid "Howdy %s"
+msgstr ""
+
+#: include/templates/mail/user/new-user-notification.php:14
+#: include/templates/mail/user/wpmu-welcome-user.php:17
+msgid "A brand new User Account has just been created for you:"
+msgstr ""
+
+#: include/templates/mail/user/new-user-notification.php:20
+#: include/templates/mail/user/wpmu-welcome-blog.php:37
+#: include/templates/mail/user/wpmu-welcome-user.php:34
+msgid "To set up your password, visit the following address:"
+msgstr ""
+
+#: include/templates/mail/user/password-edited-notification.php:15
+msgid "This notice confirms that your password was changed on %s"
+msgstr ""
+
+#: include/templates/mail/user/password-edited-notification.php:17
+msgid "If you did not change your password, please contact the Site Administrator at: %s"
+msgstr ""
+
+#: include/templates/mail/user/password-edited-notification.php:20
+msgid "This email has been sent to: %s"
+msgstr ""
+
+#: include/templates/mail/user/request-password-reset.php:16
+msgid "Someone or something has requested a password reset for the following account:"
+msgstr ""
+
+#: include/templates/mail/user/request-password-reset.php:21
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr ""
+
+#: include/templates/mail/user/request-password-reset.php:23
+msgid "To reset your password, visit the following address:"
+msgstr ""
+
+#: include/templates/mail/user/wpmu-welcome-blog.php:19
+msgid "A brand new Site has just been created for you:"
+msgstr ""
+
+#: include/templates/mail/user/wpmu-welcome-blog.php:22
+msgid "Site URL: %s"
+msgstr ""
+
+#: include/templates/mail/user/wpmu-welcome-blog.php:23
+msgid "Your Username: %s"
+msgstr ""
+
+#: include/templates/mail/user/wpmu-welcome-blog.php:29
+msgid "Password: %s"
+msgstr ""
+
+#: include/TheBot/Compat/WPMU/Settings.php:86
 msgid "This is not allowd."
 msgstr ""
 
-#: include/TheBot/Compat/WPMU.php:87
-#: include/TheBot/Compat/WPMU.php:87
-#: include/TheBot/Settings/SettingsMailer.php:69
-#: include/TheBot/Settings/SettingsMailer.php:69
-#: include/TheBot/Settings/SettingsMailer.php:106
+#: include/TheBot/Compat/WPMU/Settings.php:111
+#: include/TheBot/Settings/SettingsPage.php:67
+#: include/TheBot/Settings/SettingsPage.php:92
 msgid "WP Mailer"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:78
+#: include/TheBot/Core/Core.php:32
+msgid "From Address"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:33
+msgid "From Name"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:34
+msgid "Enable SMTP"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:35
+msgid "Hostname"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:36
+msgid "Port"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:37
+msgid "Encryption"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:38
+msgid "Allow all Certificates"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:39
+msgid "SMTP Authentication"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:40
+msgid "SMTP Auth Type"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:41
+msgid "SMTP User"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:42
+msgid "SMTP Password"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:45
+msgid "None"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:46
+msgid "SSL"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:47
+msgid "TLS"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:51
+msgid "Try all"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:52
+msgid "MD5 Challenge-Response"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:53
+msgid "Login"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:54
+msgid "Plain"
+msgstr ""
+
+#: include/TheBot/Core/Core.php:55
+msgid "OAuth 2.0"
+msgstr ""
+
+#: include/TheBot/Mail/Message.php:68
+msgid "HTML"
+msgstr ""
+
+#: include/TheBot/Mail/Message.php:135
+msgid "- no Options -"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/NewUserNotification.php:60
+#: include/TheBot/Mail/Messages/NewUserNotificationAdmin.php:52
+#: include/TheBot/Mail/Messages/PasswordChangeNotification.php:54
+#: include/TheBot/Mail/Messages/PasswordEditedNotification.php:62
+#: include/TheBot/Mail/Messages/RequestPasswordReset.php:60
+#: include/TheBot/Mail/Messages/WPMUWelcomeBlog.php:60
+#: include/TheBot/Mail/Messages/WPMUWelcomeUser.php:60
+msgid "Custom Template"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/NewUserNotification.php:61
+#: include/TheBot/Mail/Messages/NewUserNotificationAdmin.php:53
+#: include/TheBot/Mail/Messages/PasswordChangeNotification.php:55
+#: include/TheBot/Mail/Messages/PasswordEditedNotification.php:63
+#: include/TheBot/Mail/Messages/RequestPasswordReset.php:61
+#: include/TheBot/Mail/Messages/WPMUWelcomeBlog.php:61
+#: include/TheBot/Mail/Messages/WPMUWelcomeUser.php:61
+msgid "Custom Subject"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/NewUserNotification.php:62
+#: include/TheBot/Mail/Messages/NewUserNotificationAdmin.php:54
+#: include/TheBot/Mail/Messages/PasswordChangeNotification.php:56
+#: include/TheBot/Mail/Messages/PasswordEditedNotification.php:64
+#: include/TheBot/Mail/Messages/RequestPasswordReset.php:62
+#: include/TheBot/Mail/Messages/WPMUWelcomeBlog.php:62
+#: include/TheBot/Mail/Messages/WPMUWelcomeUser.php:62
+#: include/TheBot/Settings/SettingsTabMessages.php:150
+msgid "Subject"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/NewUserNotification.php:66
+msgid "Disable if a site is being created at the same time"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/NewUserNotification.php:69
+msgid "New User Notification"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/NewUserNotification.php:70
+msgid "Sent to the User on account creation."
+msgstr ""
+
+#: include/TheBot/Mail/Messages/NewUserNotificationAdmin.php:57
+msgid "New User Notification (Admin)"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/NewUserNotificationAdmin.php:60
+msgid "Sent to the Admin of the main blog on account creation."
+msgstr ""
+
+#: include/TheBot/Mail/Messages/NewUserNotificationAdmin.php:62
+msgid "Sent to the Blog Admin on account creation."
+msgstr ""
+
+#: include/TheBot/Mail/Messages/NewUserNotificationAdmin.php:75
+msgid "Disabling: If the user does not receive a Message, the blog admin also won‘t get one."
+msgstr ""
+
+#: include/TheBot/Mail/Messages/PasswordChangeNotification.php:53
+#: include/TheBot/Mail/Messages/WPMUWelcomeBlog.php:58
+#: include/TheBot/Mail/Messages/WPMUWelcomeUser.php:58
+msgid "Disabled"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/PasswordChangeNotification.php:61
+msgid "Password Changed"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/PasswordChangeNotification.php:62
+msgid "Sent to the Admin when a User Password has been changed."
+msgstr ""
+
+#: include/TheBot/Mail/Messages/PasswordEditedNotification.php:68
+msgid "Password Changed in WP-Admin"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/PasswordEditedNotification.php:69
+msgid "Sent to the User when an Admin changed his Password."
+msgstr ""
+
+#: include/TheBot/Mail/Messages/RequestPasswordReset.php:65
+msgid "Lost Password"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/RequestPasswordReset.php:66
+msgid "Sent to the User when he/she requests a Password Reset on the WP-Login-Page."
+msgstr ""
+
+#: include/TheBot/Mail/Messages/WPMUWelcomeBlog.php:59
+#: include/TheBot/Mail/Messages/WPMUWelcomeUser.php:59
+msgid "Send Password Reset Link instead of plain Password"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/WPMUWelcomeBlog.php:64
+msgid "New Blog Welcome"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/WPMUWelcomeBlog.php:65
+msgid "Welcome Mail for a new Blog."
+msgstr ""
+
+#: include/TheBot/Mail/Messages/WPMUWelcomeBlog.php:128
+msgid "Click here %s"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/WPMUWelcomeUser.php:64
+msgid "New User Welcome"
+msgstr ""
+
+#: include/TheBot/Mail/Messages/WPMUWelcomeUser.php:65
+msgid "Welcome Mail for a new Network User Account."
+msgstr ""
+
+#: include/TheBot/Mail/Messages/WPMUWelcomeUser.php:119
+msgid "Please reset under the following URL:"
+msgstr ""
+
+#: include/TheBot/Settings/SettingsPage.php:120
+msgid "Save Settings"
+msgstr ""
+
+#: include/TheBot/Settings/SettingsTabMailer.php:30
+msgid "Mailer"
+msgstr ""
+
+#: include/TheBot/Settings/SettingsTabMailer.php:46
 msgid "WP-Mailer Test"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:78
+#: include/TheBot/Settings/SettingsTabMailer.php:46
 msgid ""
 "It Works.\n"
 "\n"
 " Sincerely,\n"
-"The Bot\n"
+"The Bot"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:115
-msgid "Save Settings"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:116
-msgid "Save and Send Testmail"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:152
+#: include/TheBot/Settings/SettingsTabMailer.php:74
 msgid "Mailer Settings"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:160
-msgid "From Address"
+#: include/TheBot/Settings/SettingsTabMailer.php:87
+msgid "Save and Send Testmail"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:173
-msgid "From Name"
+#: include/TheBot/Settings/SettingsTabMessages.php:28
+msgid "Messages"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:183
-msgid "SMTP Settings"
+#: include/TheBot/Settings/SettingsTabMessages.php:105
+msgid "Message Settings"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:190
-msgid "Enable"
+#: include/TheBot/Settings/SettingsTabMessages.php:163
+#: include/TheBot/Settings/SettingsTabMessages.php:190
+msgid "- Not Supported -"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:196
-#: include/TheBot/Settings/SettingsMailer.php:228
-#: include/TheBot/Settings/SettingsMailer.php:316
-#: include/TheBot/Settings/SettingsMailer.php:331
-msgid "Enable SMTP Delivery"
+#: include/TheBot/Settings/SettingsTabMessages.php:173
+msgid "Template"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:207
-msgid "Host"
+#: include/TheBot/Settings/SettingsTabMessages.php:198
+msgid "Options"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:222
-msgid "Port"
+#: include/TheBot/Settings/SettingsTabMessages.php:227
+msgid "Edit File"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:236
-msgid "SMTP Secure"
+#: include/TheBot/Settings/SettingsTabMessages.php:230
+msgid "Theme File to edit:"
 msgstr ""
 
-#: include/TheBot/Settings/SettingsMailer.php:242
-#: include/TheBot/Settings/SettingsMailer.php:278
-#: include/TheBot/Settings/SettingsMailer.php:292
-msgid "SMTP Authentication"
+#: include/TheBot/Settings/SettingsTabMessages.php:237
+msgid "Copy to Theme"
 msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:245
-msgid "None"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:246
-msgid "SSL"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:247
-msgid "TLS"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:257
-msgid "Allow Insecure"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:263
-msgid "Allow all Certificates"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:272
-msgid "SMTP Auth"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:286
-msgid "SMTP Auth Type"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:295
-msgid "Try all"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:296
-msgid "MD5 Challenge-Response"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:297
-msgid "Login"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:298
-msgid "Plain"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:299
-msgid "OAuth 2.0"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:310
-msgid "SMTP Auth Username"
-msgstr ""
-
-#: include/TheBot/Settings/SettingsMailer.php:325
-msgid "SMTP Auth Password"
-msgstr ""
-
