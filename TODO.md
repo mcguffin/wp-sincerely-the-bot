@@ -1,7 +1,8 @@
 Sincerely The Bot
 =================
 
-Features:
+TODO Features:
+--------------
  - [ ] Capability Specific Mail delivery
 
 	 - [ ] Super-Admins (username in array get_sitemeta('site_admins'))
